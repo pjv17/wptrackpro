@@ -1,0 +1,94 @@
+[
+    {
+        "label": "Product ID",
+        "placeholder": "Product ID",
+        "name": "wtp-field-product-info-id",
+        "type": "hidden",
+        "value": "",
+        "required": 0,
+        "hide": 1,
+        "display_metabox": 0
+    },
+    {
+        "label": "Description",
+        "placeholder": "Product description",
+        "name": "wtp-field-description",
+        "type": "text",
+        "value": "",
+        "required": 0,
+        "hide": 0,
+        "display_metabox": 1
+    },
+    {
+        "label": "Weight Scale",
+        "placeholder": "Select Weight Scale",
+        "name": "wtp-field-weight-scale",
+        "type": "select",
+        "option_value": "kg,lbs",
+        "value": "",
+        "required": 1,
+        "hide": 0,
+        "display_metabox": 1
+    },
+    {
+        "label": "Size Scale",
+        "placeholder": "Select Size Scale",
+        "name": "wtp-field-size-scale",
+        "type": "select",
+        "option_value": "cm,in",
+        "value": "",
+        "required": 1,
+        "hide": 0,
+        "display_metabox": 1
+    },
+    {
+        "label": "Length",
+        "placeholder": "Length",
+        "name": "wtp-field-length",
+        "type": "number",
+        "value": "",
+        "required": 1,
+        "hide": 0,
+        "display_metabox": 0
+    },
+    {
+        "label": "Width",
+        "placeholder": "Width",
+        "name": "wtp-field-width",
+        "type": "number",
+        "value": "",
+        "required": 1,
+        "hide": 0,
+        "display_metabox": 1
+    },
+    {
+        "label": "Height",
+        "placeholder": "Height",
+        "name": "wtp-field-height",
+        "type": "number",
+        "value": "",
+        "required": 1,
+        "hide": 0,
+        "display_metabox": 0
+    },
+    {
+        "label": "Weight",
+        "placeholder": "Weight",
+        "name": "wtp-field-weight",
+        "type": "number",
+        "value": "",
+        "required": 1,
+        "hide": 0,
+        "display_metabox": 1
+    },
+    {
+        "label": "Qty",
+        "placeholder": "Qty",
+        "name": "wtp-field-qty",
+        "type": "number",
+        "value": "",
+        "required": 1,
+        "hide": 0,
+        "display_metabox": 0
+    }
+]
