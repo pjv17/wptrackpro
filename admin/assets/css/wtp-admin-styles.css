@@ -25,13 +25,15 @@
     display: block;
 }
 
-.wtp-row .wtp-fields input {
+.wtp-row .wtp-fields input,
+.wtp-row .wtp-fields select {
     width: 100%;
-    padding: 0.5rem;
+    padding: 0.3rem;
     font-size: 1rem;
-    line-height: 1;
+    line-height: 2;
     border-radius: 4px;
     border: 1px solid #999999;
+    height: 3rem;
 }
 
 #wtp-product-information .wtp-row:nth-child(odd) {
@@ -47,6 +49,14 @@
     background: #fff;
 }
 
+.wtp-row.button-add-wrap {
+    padding: 1rem 0;
+}
+
+.wtp-button.wtp-add-product {
+    margin-left: 0;
+}
+
 #wtp-product-information .wtp-row .wtp-fields p {
     font-size: 14px;
 }
@@ -57,6 +67,10 @@
 
 .wtp-fields.wtp-field-description {
     flex: 2.5;
+}
+
+.wtp-fields textarea {
+    width: 100%;
 }
 
 .d-none {

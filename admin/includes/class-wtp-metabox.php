@@ -19,6 +19,8 @@ class WTP_Metabox
         add_action('add_meta_boxes', array($this, 'add_metabox'));
         add_action('save_post_wp_trackpro', array($this, 'save_metabox'), 10);
         add_filter('post_updated_messages', array($this, 'change_post_updated_messages'));
+        add_filter('gettext', array($this, 'wtp_custom_title_text'));
+
     }
 
     /**
@@ -59,6 +61,31 @@ class WTP_Metabox
         <?php
     }
 
+    public function render_shipment_info_metabox($post)
+    {
+        wp_nonce_field('wtp_metabox_action', 'wtp_metabox_nonce');
+        ?>
+        <div id="wrap">
+            <?php
+            apply_filters('wtp_shipment_information_meta', $this->wtp_shipment_information_template_part());
+            ?>
+        </div>
+        <?php
+    }
+
+    public function render_shipment_history_metabox($post)
+    {
+        wp_nonce_field('wtp_metabox_action', 'wtp_metabox_nonce');
+        ?>
+        <div id="wrap">
+            <?php
+            apply_filters('wtp_shipment_history_meta', $this->wtp_shipment_history_template_part());
+            ?>
+        </div>
+        <?php
+    }
+
+
     /**
      * Add the meta box.
      */
@@ -85,6 +112,21 @@ class WTP_Metabox
             array($this, 'render_product_info_metabox'),
             'wp_trackpro'
         );
+
+        add_meta_box(
+            'wtp_shipment_information',
+            'Shipment Information',
+            array($this, 'render_shipment_info_metabox'),
+            'wp_trackpro'
+        );
+
+        add_meta_box(
+            'wtp_shipment_history',
+            'Shipment History',
+            array($this, 'render_shipment_history_metabox'),
+            'wp_trackpro'
+        );
+
 
     }
 
@@ -163,6 +205,17 @@ class WTP_Metabox
         return $messages;
     }
 
+
+    public function wtp_custom_title_text($input)
+    {
+        global $post_type;
+
+        if ('Add title' == $input && 'wp_trackpro' == $post_type)
+            return 'Enter Tracking Code';
+
+        return $input;
+    }
+
     private function wtp_get_product_information($post_id)
     {
         global $wpdb;
@@ -170,9 +223,31 @@ class WTP_Metabox
         return $results;
     }
 
+    private function wtp_get_shipment_history($post_id)
+    {
+        global $wpdb;
+        $results = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}wtp_shipment_history WHERE post_id = {$post_id}", OBJECT);
+        return $results;
+    }
+
     public function wtp_display_field_metabox()
     {
         $wtp_fields_json = file_get_contents(WP_TRACKPRO_PLUGIN_PATH . 'admin/assets/json/wtp-fields.json');
+        $decode_wtp_fields = json_decode($wtp_fields_json);
+        $get_display_field_name = [];
+        if ($decode_wtp_fields) {
+            foreach ($decode_wtp_fields as $wtp_field) {
+                if ($wtp_field->display_metabox == 1) {
+                    $get_display_field_name[] = $wtp_field->name;
+                }
+            }
+        }
+        return $get_display_field_name;
+    }
+
+    public function wtp_sh_display_field_metabox()
+    {
+        $wtp_fields_json = file_get_contents(WP_TRACKPRO_PLUGIN_PATH . 'admin/assets/json/wtp-shipment-history.json');
         $decode_wtp_fields = json_decode($wtp_fields_json);
         $get_display_field_name = [];
         if ($decode_wtp_fields) {
@@ -202,6 +277,20 @@ class WTP_Metabox
         $get_product_info = $this->wtp_get_product_information($post->ID);
         $get_display_field_name = $this->wtp_display_field_metabox();
         include_once(WP_TRACKPRO_PLUGIN_PATH . 'admin/template-parts/content/product-information.php');
+    }
+
+    public function wtp_shipment_information_template_part()
+    {
+        include_once(WP_TRACKPRO_PLUGIN_PATH . 'admin/template-parts/content/shipment-information.php');
+    }
+
+    public function wtp_shipment_history_template_part()
+    {
+        global $post;
+        $wtp_sh_fields_json = file_get_contents(WP_TRACKPRO_PLUGIN_PATH . 'admin/assets/json/wtp-shipment-history.json');
+        $get_shipment_history = $this->wtp_get_shipment_history($post->ID);
+        $get_display_field_name = $this->wtp_sh_display_field_metabox();
+        include_once(WP_TRACKPRO_PLUGIN_PATH . 'admin/template-parts/content/shipment-history.php');
     }
 }
 return new WTP_Metabox;

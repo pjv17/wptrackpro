@@ -8,6 +8,7 @@
 
 defined('ABSPATH') || exit;
 global $post;
+$wtp_settings = get_option('wp_trackpro_options');
 ?>
 
 <div id="wtp-sender-information">
@@ -58,8 +59,24 @@ global $post;
             <label>
                 <?php _e('Country', 'wp-trackpro'); ?>
             </label>
-            <input type="text" name="wtp-sender-country"
-                value="<?php echo get_post_meta($post->ID, 'wtp-sender-country', true); ?>">
+            <select name="wtp-sender-country">
+                <option value="" required>
+                    <?php _e("Select Country", 'wp-trackpro'); ?>
+                </option>
+                <?php
+                if ($wtp_settings) {
+                    $wtp_countries = explode(",", $wtp_settings['wtp_settings_countries']);
+                    foreach ($wtp_countries as $country) {
+                        if (get_post_meta($post->ID, 'wtp-sender-country', true) == trim($country)) {
+                            $selected = 'selected';
+                        } else {
+                            $selected = '';
+                        }
+                        echo '<option value="' . trim($country) . '" ' . $selected . '>' . trim($country) . '</option>';
+                    }
+                }
+                ?>
+            </select>
         </div>
         <div class="wtp-fields wtp-field-state">
             <label>

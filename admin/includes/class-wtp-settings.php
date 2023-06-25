@@ -19,7 +19,7 @@ class WTP_Settings
     {
         add_action('admin_menu', array($this, 'add_submenu_page_to_post_type'));
         add_action('admin_init', array($this, 'sub_menu_page_init'));
-        add_action('admin_init', array($this, 'media_selector_scripts'));
+        register_activation_hook(WP_TRACKPRO_PLUGIN_FILE, array($this, 'wtp_update_settings'));
     }
 
     /**
@@ -42,9 +42,7 @@ class WTP_Settings
      */
     public function wp_trackpro_options_display()
     {
-        $this->options = get_option('wp-trackpro_archive');
-
-        wp_enqueue_media();
+        $this->options = get_option('wp_trackpro_options');
 
         echo '<div class="wrap">';
 
@@ -68,8 +66,8 @@ class WTP_Settings
     {
         register_setting(
             'wp_trackpro_settings',
-            'wp-trackpro_archive',
-            array($this, 'sanitize')
+            'wp_trackpro_options',
+            array($this, 'sanitize') // Sanitize
         );
 
         add_settings_section(
@@ -88,12 +86,13 @@ class WTP_Settings
         );
 
         add_settings_field(
-            'logo_attachment',
-            __('Logo', 'wp-trackpro'),
-            array($this, 'header_bg_image_callback'),
+            'wtp_settings_shipping_mode',
+            __('Shipping Mode', 'wp-trackpro'),
+            array($this, 'shipping_mode'),
             'wp-trackpro-settings-page',
             'header_settings_section'
         );
+
     }
 
     /**
@@ -106,10 +105,11 @@ class WTP_Settings
         $new_input = array();
 
         if (isset($input['wtp_settings_countries']))
-            $new_input['wtp_settings_countries'] = sanitize_text_field($input['wtp_settings_countries']);
+            $new_input['wtp_settings_countries'] = sanitize_textarea_field($input['wtp_settings_countries']);
 
-        if (isset($input['logo_attachment']))
-            $new_input['logo_attachment'] = absint($input['logo_attachment']);
+
+        if (isset($input['wtp_settings_shipping_mode']))
+            $new_input['wtp_settings_shipping_mode'] = sanitize_textarea_field($input['wtp_settings_shipping_mode']);
 
         return $new_input;
     }
@@ -120,47 +120,26 @@ class WTP_Settings
     public function countries_callback()
     {
         printf(
-            '<textarea rows="5" cols="70" id="wtp-setting-countries" name="wp-trackpro_archive[countries]" />%s</textarea>',
-            isset($this->options['wtp_settings_countries']) ? esc_attr($this->options['wtp_settings_countries']) : ''
+            '<textarea rows="5" cols="70" id="wtp-setting-countries" name="wp_trackpro_options[wtp_settings_countries]" />%s</textarea>',
+            isset($this->options['wtp_settings_countries']) ? esc_attr($this->options['wtp_settings_countries']) : ""
         );
     }
 
-    /**
-     * Get the settings option array and print one of its values
-     */
-    public function header_bg_image_callback()
+    public function shipping_mode()
     {
-        $attachment_id = isset($this->options['logo_attachment']) ? $this->options['logo_attachment'] : '';
-
-        // Image Preview
-        printf('<div class="image-preview-wrapper"><img id="image-preview" src="%s" ></div>', wp_get_attachment_url($attachment_id));
-
-        // Image Upload Button
         printf(
-            '<input id="upload_image_button" type="button" class="button" value="%s" />',
-            __('Upload image', 'wp-trackpro')
-        );
-
-        // Hidden field containing the value of the image attachment id
-        printf(
-            '<input type="hidden" name="wp-trackpro_archive[logo_attachment]" id="logo_attachment" value="%s">',
-            $attachment_id
+            '<textarea rows="5" cols="70" id="wtp-setting-shipping_mode" name="wp_trackpro_options[wtp_settings_shipping_mode]" />%s</textarea>',
+            isset($this->options['wtp_settings_shipping_mode']) ? esc_attr($this->options['wtp_settings_shipping_mode']) : ""
         );
     }
-
-    public function media_selector_scripts()
+    public function wtp_update_settings()
     {
-        $my_saved_attachment_post_id = get_option('media_selector_attachment_id', 0);
-
-        wp_register_script('sub_menu_media_selector_scripts', get_template_directory_uri() . '/admin/js/media-selector.js', array('jquery'), false, true);
-
-        $selector_data = array(
-            'attachment_id' => get_option('media_selector_attachment_id', 0)
-        );
-
-        wp_localize_script('sub_menu_media_selector_scripts', 'selector_data', $selector_data);
-
-        wp_enqueue_script('sub_menu_media_selector_scripts');
+        if (empty(get_option('wtp_settings_countries'))) {
+            update_option('wtp_settings_countries', "Afghanistan, Albania, Algeria, Andorra, Angola, Antigua and Barbuda, Argentina, Armenia, Australia, Austria, Azerbaijan, Bahamas, Bahrain, Bangladesh, Barbados, Belarus, Belgium, Belize, Benin, Bhutan, Bolivia, Bosnia and Herzegovina, Botswana, Brazil, Brunei, Bulgaria, Burkina Faso, Burundi, Côte d'Ivoire, Cabo Verde, Cambodia, Cameroon, Canada, Central African Republic, Chad, Chile, China, Colombia, Comoros, Congo (Congo-Brazzaville), Costa Rica, Croatia, Cuba, Cyprus, Czechia (Czech Republic), Democratic Republic of the Congo, Denmark, Djibouti, Dominica, Dominican Republic, Ecuador, Egypt, El Salvador, Equatorial Guinea, Eritrea, Estonia, Ethiopia, Fiji, Finland, France, Gabon, Gambia, Georgia, Germany, Ghana, Greece, Grenada, Guatemala, Guinea, Guinea-Bissau, Guyana, Haiti, Holy See, Honduras, Hungary, Iceland, India, Indonesia, Iran, Iraq, Ireland, Israel, Italy, Jamaica, Japan, Jordan, Kazakhstan, Kenya, Kiribati, Kuwait, Kyrgyzstan, Laos, Latvia, Lebanon, Lesotho, Liberia, Libya, Liechtenstein, Lithuania, Luxembourg, Madagascar, Malawi, Malaysia, Maldives, Mali, Malta, Marshall Islands, Mauritania, Mauritius, Mexico, Micronesia, Moldova, Monaco, Mongolia, Montenegro, Morocco, Mozambique, Myanmar (formerly Burma), Namibia, Nauru, Nepal, Netherlands, New Zealand, Nicaragua, Niger, Nigeria, North Korea, North Macedonia, Norway, Oman, Pakistan, Palau, Palestine State, Panama, Papua New Guinea, Paraguay, Peru, Philippines, Poland, Portugal, Qatar, Romania, Russia, Rwanda, Saint Kitts and Nevis, Saint Lucia, Saint Vincent and the Grenadines, Samoa, San Marino, Sao Tome and Principe, Saudi Arabia, Senegal, Serbia, Seychelles, Sierra Leone, Singapore, Slovakia, Slovenia, Solomon Islands, Somalia, South Africa, South Korea, South Sudan, Spain, Sri Lanka, Sudan, Suriname, Sweden, Switzerland, Syria, Tajikistan, Tanzania, Thailand, Timor-Leste, Togo, Tonga, Trinidad and Tobago, Tunisia, Turkey, Turkmenistan, Tuvalu, Uganda, Ukraine, United Arab Emirates, United Kingdom, United States of America, Uruguay, Uzbekistan, Vanuatu, Venezuela, Vietnam, Yemen, Zambia, Zimbabwe");
+        }
+        if (empty(get_option('wtp_settings_shipping_mode'))) {
+            update_option('wtp_settings_shipping_mode', "Air Transport, Land Transport, Sea Transport");
+        }
     }
 }
 

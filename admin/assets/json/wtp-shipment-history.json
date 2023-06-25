@@ -1,0 +1,63 @@
+[
+    {
+        "label": "Shipment History ID",
+        "placeholder": "Shipment History ID",
+        "name": "wtp-field-shipment-history-id",
+        "type": "hidden",
+        "value": "",
+        "required": 0,
+        "hide": 1,
+        "display_metabox": 0
+    },
+    {
+        "label": "Description",
+        "placeholder": "Description",
+        "name": "wtp-shipment-description",
+        "type": "textarea",
+        "value": "",
+        "required": 0,
+        "hide": 0,
+        "display_metabox": 1
+    },
+    {
+        "label": "Date",
+        "placeholder": "Date",
+        "name": "wtp-shipment-date",
+        "type": "date",
+        "value": "",
+        "required": 1,
+        "hide": 0,
+        "display_metabox": 1
+    },
+    {
+        "label": "Time",
+        "placeholder": "Time",
+        "name": "wtp-shipment-time",
+        "type": "time",
+        "value": "",
+        "required": 1,
+        "hide": 0,
+        "display_metabox": 1
+    },
+    {
+        "label": "Status",
+        "placeholder": "Status",
+        "name": "wtp-shipment-status",
+        "type": "select",
+        "option_value": "Pending,On Hold,Cancelled,In Transit,Delivered",
+        "value": "",
+        "required": 1,
+        "hide": 0,
+        "display_metabox": 1
+    },
+    {
+        "label": "Location",
+        "placeholder": "Location",
+        "name": "wtp-shipment-location",
+        "type": "text",
+        "value": "",
+        "required": 0,
+        "hide": 0,
+        "display_metabox": 1
+    }
+]

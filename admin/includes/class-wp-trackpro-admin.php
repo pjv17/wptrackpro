@@ -26,6 +26,11 @@ class WP_TrackPro_Admin
         add_action("wp_ajax_nopriv_wtp_product_information_edit", array($this, "wtp_product_information_edit"));
         add_action("wp_ajax_wtp_product_information_update", array($this, "wtp_product_information_update"));
         add_action("wp_ajax_nopriv_wtp_product_information_update", array($this, "wtp_product_information_update"));
+        add_action("wp_ajax_wtp_product_information_delete", array($this, "wtp_product_information_delete"));
+        add_action("wp_ajax_nopriv_wtp_product_information_delete", array($this, "wtp_product_information_delete"));
+        add_action("wp_ajax_wtp_shipment_history_save", array($this, "wtp_shipment_history_save"));
+        add_action("wp_ajax_nopriv_wtp_shipment_history_save", array($this, "wtp_shipment_history_save"));
+
 
         $this->includes();
     }
@@ -37,6 +42,7 @@ class WP_TrackPro_Admin
          */
         include_once WP_TRACKPRO_PLUGIN_PATH . 'admin/includes/class-wtp-metabox.php';
         include_once WP_TRACKPRO_PLUGIN_PATH . 'admin/includes/class-wtp-settings.php';
+        include_once WP_TRACKPRO_PLUGIN_PATH . 'admin/includes/class-wtp-database.php';
     }
 
     public function wtp_enqueue_admin_script()
@@ -181,12 +187,12 @@ class WP_TrackPro_Admin
             <div class="wtp-product-info">
                 <h2 class="wtp-error-message">
                     <strong class="wtp-product-info-label">
-                        <?php _e("No Results", "wp-trackpro"); ?>
-                    </strong>
+            <?php _e("No Results", "wp-trackpro"); ?>
+            </strong>
 
-                </h2>
-            </div>
-            <?php
+        </h2>
+    </div>
+<?php
         }
         wp_die();
     }
@@ -284,6 +290,75 @@ class WP_TrackPro_Admin
         echo json_encode($wtp_results);
         wp_die();
 
+    }
+
+    public function wtp_product_information_delete()
+    {
+        global $wpdb;
+        $get_wtp_prod_info_id = $_REQUEST['productID'];
+        $wtp_results['status'] = false;
+
+        $table = $wpdb->prefix . 'wtp_product_information';
+        $wtp_delete_product_info = $wpdb->delete($table, array('prod_info_id' => $get_wtp_prod_info_id));
+        if ($wtp_delete_product_info) {
+            $wtp_results['productID'] = $get_wtp_prod_info_id;
+            $wtp_results['status'] = true;
+        }
+
+        echo json_encode($wtp_results);
+        wp_die();
+    }
+
+    public function wtp_shipment_history_save()
+    {
+        global $wpdb;
+
+        $get_all_product_information = $_REQUEST;
+        $get_wtp_id = $_REQUEST['postID'];
+        $wtp_fields = [];
+        $wtp_results['status'] = false;
+        $wtp_results['fields'] = [];
+        $wtp_results['checker'] = [];
+        if ($get_all_product_information) {
+            foreach ($get_all_product_information as $product_info_key => $product_info_val) {
+                if ($product_info_key != "action" && $product_info_key != "postID") {
+                    if (preg_match('/(wtp-*)/', $product_info_key, $output_array) || preg_match('/(postID)/', $product_info_key, $output_array)) {
+                        $wtp_fields[$product_info_key] = $product_info_val;
+                    }
+
+                }
+            }
+        }
+        $json_enc_wtp_fields = json_encode($wtp_fields);
+        $insert_product_info = $wpdb->insert("{$wpdb->prefix}wtp_shipment_history", array('post_id' => $get_wtp_id, 'prod_values' => $json_enc_wtp_fields));
+        if ($insert_product_info) {
+            $wtp_results['status'] = true;
+            $wtp_last_id = $wpdb->insert_id;
+
+            $wtp_fields_json = file_get_contents(WP_TRACKPRO_PLUGIN_PATH . 'admin/assets/json/wtp-shipment-history.json');
+            $decode_wtp_fields = json_decode($wtp_fields_json);
+            $get_field_name = [];
+            if ($decode_wtp_fields) {
+                foreach ($decode_wtp_fields as $wtp_field) {
+                    if ($wtp_field->display_metabox == 1) {
+                        $get_field_name[] = $wtp_field->name;
+                    }
+                }
+            }
+
+            $get_display_field_value = [];
+            if ($json_enc_wtp_fields) {
+                foreach (json_decode($json_enc_wtp_fields, true) as $key => $value) {
+                    if (in_array($key, $get_field_name)) {
+                        $get_display_field_value[$key] = $value;
+                    }
+                }
+            }
+            $wtp_results['fields'] = $get_display_field_value['wtp-field-shipment-history-id'] = $wtp_last_id;
+            $wtp_results['fields'] = $get_display_field_value;
+        }
+        echo json_encode($wtp_results);
+        wp_die();
     }
 
 }

@@ -42,5 +42,6 @@ if (!defined('ABSPATH')) {
 define('WP_TRACKPRO_VERSION', '1.0.0');
 define('WP_TRACKPRO_PLUGIN_URL', plugin_dir_url(__FILE__));
 define('WP_TRACKPRO_PLUGIN_PATH', plugin_dir_path(__FILE__));
+define('WP_TRACKPRO_PLUGIN_FILE', __FILE__);
 
 include_once WP_TRACKPRO_PLUGIN_PATH . 'includes/class-wp-trackpro.php';
