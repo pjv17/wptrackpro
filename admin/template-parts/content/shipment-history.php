@@ -52,7 +52,7 @@ ob_start();
         foreach ($get_shipment_history as $key => $shipment_history) {
             $decode_prod_val = json_decode($shipment_history->prod_values);
             ?>
-            <div class="wtp-row" id="wtp-row-<?php echo $shipment_history->prod_info_id ?>">
+            <div class="wtp-row" id="wtp-row-<?php echo $shipment_history->sh_id ?>">
                 <?php
                 foreach ($decode_prod_val as $key => $value) {
                     if (in_array($key, $get_display_field_name)) {

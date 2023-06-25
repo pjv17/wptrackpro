@@ -550,9 +550,14 @@ jQuery(function ($) {
         if (
           field.type == "text" ||
           field.type == "number" ||
-          field.type == "hidden"
+          field.type == "hidden" ||
+          field.type == "date" ||
+          field.type == "time"
         ) {
           getFieldValue = $(`.wtp-field.${field.name} input`).val();
+        }
+        if (field.type == "textarea") {
+          getFieldValue = $(`.wtp-field.${field.name} textarea`).val();
         }
         if (field.type == "select") {
           getFieldValue = $(`.wtp-field.${field.name} select`).val();
@@ -583,9 +588,10 @@ jQuery(function ($) {
             swal_icon = "success";
             swal_title = "Success";
             swal_text = "Product Information has been successfully saved!";
-            $("#wtp-product-information").append(
+            $("#wtp-shipment-history-information").append(
               `<div class="wtp-row" id="wtp-row-${response.fields["wtp-field-shipment-history-id"]}"></div>`
             );
+            console.log(response);
             setTimeout(function () {
               parsedSHFieldsJson.forEach((field) => {
                 if (field.display_metabox == 1) {
@@ -597,11 +603,9 @@ jQuery(function ($) {
                   );
                 }
               });
-              let get_product_info_id =
-                response.fields["wtp-field-shipment-history-id"];
-              $(
-                `#wtp-row-${response.fields["wtp-field-shipment-history-id"]}`
-              ).append(`<div class="wtp-fields wtp-field-action"><div type="button" class="wtp-button wtp-view swal2-styled" 
+              let get_product_info_id = response.fields["wtp-field-shipment-history-id"];
+
+              $(`#wtp-row-${response.fields["wtp-field-shipment-history-id"]}`).append(`<div class="wtp-fields wtp-field-action"><div type="button" class="wtp-button wtp-view swal2-styled" 
               name="wtp-product-edit" btn-action="view" sh-id="${get_product_info_id}" placeholder="View"><span class="dashicons dashicons-visibility"></span> View</div><div type="button" 
               class="wtp-button wtp-edit swal2-styled" name="wtp-product-edit" sh-id="${get_product_info_id}" btn-action="edit"><span class="dashicons dashicons-edit-page"></span> Edit </div>
               <div type="button" class="wtp-button wtp-delete swal2-styled" name="wtp-product-delete" btn-action="delete" sh-id="${get_product_info_id}"><span class="dashicons dashicons-trash"></span> Delete</div></div>`);
