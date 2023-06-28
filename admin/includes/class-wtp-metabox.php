@@ -226,7 +226,7 @@ class WTP_Metabox
     private function wtp_get_shipment_history($post_id)
     {
         global $wpdb;
-        $results = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}wtp_shipment_history WHERE post_id = {$post_id}", OBJECT);
+        $results = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}wtp_shipment_history WHERE post_id = {$post_id} ORDER BY date_time DESC", OBJECT);
         return $results;
     }
 

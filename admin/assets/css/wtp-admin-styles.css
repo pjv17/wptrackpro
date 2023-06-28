@@ -40,12 +40,14 @@
     background: #efefef;
 }
 
-#wtp-product-information .wtp-row.wtp-header-row {
+#wtp-product-information .wtp-row.wtp-header-row,
+#wtp-shipment-history-information .wtp-row.wtp-header-row {
     background: #496e7c;
     color: #ffffff;
 }
 
-#wtp-product-information .wtp-row.button-add-wrap {
+#wtp-product-information .wtp-row.button-add-wrap,
+#wtp-shipment-history-information .wtp-row.button-add-wrap {
     background: #fff;
 }
 
@@ -57,7 +59,8 @@
     margin-left: 0;
 }
 
-#wtp-product-information .wtp-row .wtp-fields p {
+#wtp-product-information .wtp-row .wtp-fields p,
+#wtp-shipment-history-information .wtp-row .wtp-fields p {
     font-size: 14px;
 }
 
@@ -87,7 +90,8 @@
 }
 
 .wtp-button.wtp-add-product,
-.wtp-button.wtp-view.swal2-styled {
+.wtp-button.wtp-view.swal2-styled,
+.wtp-button.wtp-add-shipment-history {
     background: #28A228;
     color: #fff;
 }
@@ -157,13 +161,15 @@ button.swal2-confirm.swal2-styled {
     font-size: 15px;
 }
 
-.wtp-view-results .wtp-product-info {
+.wtp-view-results .wtp-product-info,
+.wtp-view-results .wtp-shipment-history {
     flex-basis: 50%;
     text-align: left;
     font-size: 15px;
 }
 
-.wtp-view-results .wtp-product-info p {
+.wtp-view-results .wtp-product-info p,
+.wtp-view-results .wtp-shipment-history p {
     font-size: 15px;
 }
 
@@ -171,7 +177,8 @@ button.swal2-confirm.swal2-styled {
     text-align: center;
 }
 
-.wtp-view-results .wtp-product-info span.wtp-product-info-value {
+.wtp-view-results .wtp-product-info span.wtp-product-info-value,
+.wtp-view-results .wtp-shipment-history span.wtp-shipment-history-value {
     display: inline-block;
     font-size: 14px;
 }
