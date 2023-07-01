@@ -12,5 +12,7 @@ Track, manage, and streamline your shipments with WP TrackPro, the all-in-one tr
 
 <b>Documentations:<b>
 - Shortcode for Tracking of Shipment is <code>[wtp-track-shipment]</code>
-- You can edit the product information fields by using <code>add_filter('wtp-product-fields-json', 'your_function_here');</code>. And you can find the JSON file under /wp-trackpro/admin/assets/js/json/wtp-fields.json
-- You can edit the shipment history fields by using <code>add_filter('wtp-shipment-history-fields-json', 'your_function_here');</code>. And you can find the JSON file under /wp-trackpro/admin/assets/js/json/wtp-shipment-history.json
+- You can add/edit the product information fields by using <code>add_filter('wtp-product-fields-json', 'your_function_here');</code>. And you can find the JSON file for your reference under /wp-trackpro/admin/assets/js/json/wtp-fields.json
+- You can add/edit the shipment history fields by using <code>add_filter('wtp-shipment-history-fields-json', 'your_function_here');</code>. And you can find the JSON file for your reference under /wp-trackpro/admin/assets/js/json/wtp-shipment-history.json
+
+
