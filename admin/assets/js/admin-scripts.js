@@ -1,5 +1,5 @@
 jQuery(function ($) {
-  const adminScripts = {
+  const wtpAdminScripts = {
     init: function () {
       this.addProducts();
       this.displayProductDetails();
@@ -9,23 +9,24 @@ jQuery(function ($) {
       this.displayShipmentHistory();
       this.editShipmentHistory();
       this.deleteShipmentHistory();
+      this.sortShipmentHistory();
     },
     addProducts() {
       $(".button-add-wrap .wtp-button.wtp-add-product").on("click", function () {
         Swal.fire({
           title: "Add Item",
-          html: adminScripts.getFieldJSON(),
+          html: wtpAdminScripts.getFieldJSON(),
           showCancelButton: true,
           cancelButtonText: "Cancel",
           confirmButtonText: "Save",
           reverseButtons: true,
           allowOutsideClick: () => !Swal.isLoading(),
           preConfirm: () => {
-            adminScripts.fieldValidation();
+            wtpAdminScripts.fieldValidation();
           },
         }).then((result) => {
           if (result.isConfirmed) {
-            adminScripts.insertProductDetails();
+            wtpAdminScripts.insertProductDetails();
           }
         });
       });
@@ -148,12 +149,12 @@ jQuery(function ($) {
               name="wtp-product-edit" btn-action="view" prod-info-id="${get_product_info_id}" placeholder="View"><span class="dashicons dashicons-visibility"></span> View</div><div type="button" 
               class="wtp-button wtp-edit swal2-styled" name="wtp-product-edit" prod-info-id="${get_product_info_id}" btn-action="edit"><span class="dashicons dashicons-edit-page"></span> Edit </div>
               <div type="button" class="wtp-button wtp-delete swal2-styled" name="wtp-product-delete" btn-action="delete" prod-info-id="${get_product_info_id}"><span class="dashicons dashicons-trash"></span> Delete</div></div>`);
-              adminScripts.displayProductDetails();
-              adminScripts.editProductDetails();
-              adminScripts.deleteProductDetails();
-              adminScripts.displayShipmentHistory();
-              adminScripts.editShipmentHistory();
-              adminScripts.deleteShipmentHistory();
+              wtpAdminScripts.displayProductDetails();
+              wtpAdminScripts.editProductDetails();
+              wtpAdminScripts.deleteProductDetails();
+              wtpAdminScripts.displayShipmentHistory();
+              wtpAdminScripts.editShipmentHistory();
+              wtpAdminScripts.deleteShipmentHistory();
             }, 1000);
           }
           Swal.fire({
@@ -205,7 +206,7 @@ jQuery(function ($) {
 
         Swal.fire({
           title: "Item Details",
-          html: adminScripts.getProductInfoDetails(productInfoID, getPostID),
+          html: wtpAdminScripts.getProductInfoDetails(productInfoID, getPostID),
           confirmButtonText: "Okay",
           didOpen: () => {
             Swal.showLoading();
@@ -239,7 +240,7 @@ jQuery(function ($) {
 
         Swal.fire({
           title: "Edit Item",
-          html: adminScripts.getFieldJSON(),
+          html: wtpAdminScripts.getFieldJSON(),
           showCancelButton: true,
           cancelButtonText: "Cancel",
           confirmButtonText: "Save",
@@ -247,14 +248,14 @@ jQuery(function ($) {
           allowOutsideClick: () => !Swal.isLoading(),
           didOpen: () => {
             Swal.showLoading();
-            adminScripts.getCurrentProductDetails(productInfoID, getPostID);
+            wtpAdminScripts.getCurrentProductDetails(productInfoID, getPostID);
           },
           preConfirm: () => {
-            adminScripts.fieldValidation();
+            wtpAdminScripts.fieldValidation();
           },
         }).then((result) => {
           if (result.isConfirmed) {
-            adminScripts.updateProductDetails(productInfoID, getPostID);
+            wtpAdminScripts.updateProductDetails(productInfoID, getPostID);
           }
         });
       });
@@ -368,12 +369,12 @@ jQuery(function ($) {
               name="wtp-product-edit" btn-action="view" prod-info-id="${get_product_info_id}" placeholder="View"><span class="dashicons dashicons-visibility"></span> View</div><div type="button" 
               class="wtp-button wtp-edit swal2-styled" name="wtp-product-edit" prod-info-id="${get_product_info_id}" btn-action="edit"><span class="dashicons dashicons-edit-page"></span> Edit </div>
               <div type="button" class="wtp-button wtp-delete swal2-styled" name="wtp-product-delete" btn-action="delete" prod-info-id="${get_product_info_id}"><span class="dashicons dashicons-trash"></span> Delete</div></div>`);
-              adminScripts.displayProductDetails();
-              adminScripts.editProductDetails();
-              adminScripts.deleteProductDetails();
-              adminScripts.displayShipmentHistory();
-              adminScripts.editShipmentHistory();
-              adminScripts.deleteShipmentHistory();
+              wtpAdminScripts.displayProductDetails();
+              wtpAdminScripts.editProductDetails();
+              wtpAdminScripts.deleteProductDetails();
+              wtpAdminScripts.displayShipmentHistory();
+              wtpAdminScripts.editShipmentHistory();
+              wtpAdminScripts.deleteShipmentHistory();
             }, 1000);
           }
           Swal.fire({
@@ -434,11 +435,11 @@ jQuery(function ($) {
                   title: swal_title,
                   text: swal_text,
                 });
-                adminScripts.displayProductDetails();
-                adminScripts.editProductDetails();
-                adminScripts.displayShipmentHistory();
-                adminScripts.editShipmentHistory();
-                adminScripts.deleteShipmentHistory();
+                wtpAdminScripts.displayProductDetails();
+                wtpAdminScripts.editProductDetails();
+                wtpAdminScripts.displayShipmentHistory();
+                wtpAdminScripts.editShipmentHistory();
+                wtpAdminScripts.deleteShipmentHistory();
               }
             });
           }
@@ -447,25 +448,26 @@ jQuery(function ($) {
     },
     addShipmentHistory() {
       $("#wtp-shipment-history-information .button-add-wrap .wtp-button.wtp-add-shipment-history").on("click", function () {
+        let shipmentHistoryAction = 'Add';
         Swal.fire({
           title: "Add Shipment History",
-          html: adminScripts.getShipmentHistoryJSON(),
+          html: wtpAdminScripts.getShipmentHistoryJSON(shipmentHistoryAction),
           showCancelButton: true,
           cancelButtonText: "Cancel",
           confirmButtonText: "Save",
           reverseButtons: true,
           allowOutsideClick: () => !Swal.isLoading(),
           preConfirm: () => {
-            adminScripts.fieldValidationSH();
+            wtpAdminScripts.fieldValidationSH();
           },
         }).then((result) => {
           if (result.isConfirmed) {
-            adminScripts.insertShipmentHistory();
+            wtpAdminScripts.insertShipmentHistory();
           }
         });
       });
     },
-    getShipmentHistoryJSON() {
+    getShipmentHistoryJSON(shipmentHistoryAction = '') {
       let parsedSHFieldsJson = $.parseJSON(
         $(".wtp-shipment-history-fields-json").attr("json-fields")
       );
@@ -512,6 +514,9 @@ jQuery(function ($) {
         counter++;
       });
       getFields += "</div>";
+      if (shipmentHistoryAction == 'Add') {
+        setTimeout(function () { wtpAdminScripts.setDefaultDate(); wtpAdminScripts.setDefaultTime(); }, 1000);
+      }
       return getFields;
     },
     fieldValidationSH() {
@@ -620,12 +625,12 @@ jQuery(function ($) {
               name="wtp-product-edit" btn-action="view" sh-id="${get_product_info_id}" placeholder="View"><span class="dashicons dashicons-visibility"></span> View</div><div type="button" 
               class="wtp-button wtp-edit swal2-styled" name="wtp-product-edit" sh-id="${get_product_info_id}" btn-action="edit"><span class="dashicons dashicons-edit-page"></span> Edit </div>
               <div type="button" class="wtp-button wtp-delete swal2-styled" name="wtp-product-delete" btn-action="delete" sh-id="${get_product_info_id}"><span class="dashicons dashicons-trash"></span> Delete</div></div>`);
-              adminScripts.displayProductDetails();
-              adminScripts.editProductDetails();
-              adminScripts.deleteProductDetails();
-              adminScripts.displayShipmentHistory();
-              adminScripts.editShipmentHistory();
-              adminScripts.deleteShipmentHistory();
+              wtpAdminScripts.displayProductDetails();
+              wtpAdminScripts.editProductDetails();
+              wtpAdminScripts.deleteProductDetails();
+              wtpAdminScripts.displayShipmentHistory();
+              wtpAdminScripts.editShipmentHistory();
+              wtpAdminScripts.deleteShipmentHistory();
             }, 1000);
           }
           Swal.fire({
@@ -634,6 +639,11 @@ jQuery(function ($) {
             text: swal_text,
           });
         },
+        complete: function () {
+          setTimeout(function () {
+            wtpAdminScripts.sortShipmentHistory();
+          }, 1000);
+        }
       });
     },
     displayShipmentHistory() {
@@ -643,7 +653,7 @@ jQuery(function ($) {
 
         Swal.fire({
           title: "Shipment History Details",
-          html: adminScripts.getShipmentHistoryDetails(shipmentHistoryID, getPostID),
+          html: wtpAdminScripts.getShipmentHistoryDetails(shipmentHistoryID, getPostID),
           confirmButtonText: "Okay",
           didOpen: () => {
             Swal.showLoading();
@@ -677,7 +687,7 @@ jQuery(function ($) {
 
         Swal.fire({
           title: "Edit Item",
-          html: adminScripts.getShipmentHistoryJSON(),
+          html: wtpAdminScripts.getShipmentHistoryJSON(),
           showCancelButton: true,
           cancelButtonText: "Cancel",
           confirmButtonText: "Save",
@@ -685,14 +695,14 @@ jQuery(function ($) {
           allowOutsideClick: () => !Swal.isLoading(),
           didOpen: () => {
             Swal.showLoading();
-            adminScripts.getCurrentShipmentHistory(shipmentHistoryID, getPostID);
+            wtpAdminScripts.getCurrentShipmentHistory(shipmentHistoryID, getPostID);
           },
           preConfirm: () => {
-            adminScripts.fieldValidationSH();
+            wtpAdminScripts.fieldValidationSH();
           },
         }).then((result) => {
           if (result.isConfirmed) {
-            adminScripts.updateShipmentHistory(shipmentHistoryID, getPostID);
+            wtpAdminScripts.updateShipmentHistory(shipmentHistoryID, getPostID);
           }
         });
       });
@@ -816,11 +826,11 @@ jQuery(function ($) {
               name="wtp-product-edit" btn-action="view" sh-id="${get_sh_id}" placeholder="View"><span class="dashicons dashicons-visibility"></span> View</div><div type="button" 
               class="wtp-button wtp-edit swal2-styled" name="wtp-product-edit" sh-id="${get_sh_id}" btn-action="edit"><span class="dashicons dashicons-edit-page"></span> Edit </div>
               <div type="button" class="wtp-button wtp-delete swal2-styled" name="wtp-product-delete" btn-action="delete" sh-id="${get_sh_id}"><span class="dashicons dashicons-trash"></span> Delete</div></div>`);
-              adminScripts.displayProductDetails();
-              adminScripts.editProductDetails();
-              adminScripts.deleteProductDetails();
-              adminScripts.displayShipmentHistory();
-              adminScripts.editShipmentHistory();
+              wtpAdminScripts.displayProductDetails();
+              wtpAdminScripts.editProductDetails();
+              wtpAdminScripts.deleteProductDetails();
+              wtpAdminScripts.displayShipmentHistory();
+              wtpAdminScripts.editShipmentHistory();
             }, 1000);
           }
           Swal.fire({
@@ -829,6 +839,11 @@ jQuery(function ($) {
             text: swal_text,
           });
         },
+        complete: function () {
+          setTimeout(function () {
+            wtpAdminScripts.sortShipmentHistory();
+          }, 1000);
+        }
       });
     },
     deleteShipmentHistory() {
@@ -881,10 +896,15 @@ jQuery(function ($) {
                   title: swal_title,
                   text: swal_text,
                 });
-                adminScripts.displayProductDetails();
-                adminScripts.editProductDetails();
-                adminScripts.displayShipmentHistory();
-                adminScripts.editShipmentHistory();
+                wtpAdminScripts.displayProductDetails();
+                wtpAdminScripts.editProductDetails();
+                wtpAdminScripts.displayShipmentHistory();
+                wtpAdminScripts.editShipmentHistory();
+              },
+              complete: function () {
+                setTimeout(function () {
+                  wtpAdminScripts.sortShipmentHistory();
+                }, 1000);
               }
             });
           }
@@ -901,10 +921,10 @@ jQuery(function ($) {
         url: wtp_params.ajax_url,
         type: "POST",
         data: getData,
-        dataType: "JSON",
+        dataType: "HTML",
         beforeSend: function () {
           Swal.fire({
-            title: "Sorting...",
+            title: "<h6>Sorting Shipment History Details...</h6>",
             text: "Please wait",
             showConfirmButton: false,
             allowOutsideClick: false,
@@ -912,12 +932,27 @@ jQuery(function ($) {
           Swal.showLoading();
         },
         success: function (response) {
-
+          Swal.hideLoading();
+          Swal.close();
+          $('.wtp-sh-wrap-rows').html(response);
+          wtpAdminScripts.displayProductDetails();
+          wtpAdminScripts.editProductDetails();
+          wtpAdminScripts.displayShipmentHistory();
+          wtpAdminScripts.editShipmentHistory();
+          wtpAdminScripts.deleteProductDetails();
         }
       });
+    },
+    setDefaultDate() {
+      let today = new Date();
+      $(".wtp-field input[type='date']").val(today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2));
+    },
+    setDefaultTime() {
+      var time = new Date();
+      $(".wtp-field input[type='time']").val(time.getHours() + ':' + time.getMinutes());
     }
   };
   $(document).ready(function () {
-    adminScripts.init();
+    wtpAdminScripts.init();
   });
 });

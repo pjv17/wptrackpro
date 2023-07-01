@@ -38,7 +38,8 @@ class WP_TrackPro_Admin
         add_action("wp_ajax_nopriv_wtp_shipment_history_update", array($this, "wtp_shipment_history_update"));
         add_action("wp_ajax_wtp_shipment_history_delete", array($this, "wtp_shipment_history_delete"));
         add_action("wp_ajax_nopriv_wtp_shipment_history_delete", array($this, "wtp_shipment_history_delete"));
-
+        add_action("wp_ajax_wtp_shipment_history_sort", array($this, "wtp_shipment_history_sort"));
+        add_action("wp_ajax_nopriv_wtp_shipment_history_sort", array($this, "wtp_shipment_history_sort"));
         $this->includes();
     }
 
@@ -413,13 +414,13 @@ class WP_TrackPro_Admin
             <p>
                 <strong class="wtp-shipment-history-label">
                     <?php echo $product_info[0]; ?>
-                </strong>:
-                <span class="wtp-shipment-history-value">
-                    <?php echo $product_info[1]; ?>
-                </span>
-            </p>
-        </div>
-        <?php
+</strong>:
+<span class="wtp-shipment-history-value">
+    <?php echo $product_info[1]; ?>
+</span>
+</p>
+</div>
+<?php
             }
         } else {
             ?>
@@ -557,62 +558,58 @@ class WP_TrackPro_Admin
 
         $wtp_id = $_REQUEST['postID'];
 
-        $get_product_information = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}wtp_shipment_history WHERE post_id = '$wtp_id' ORDER BY date_time DESC");
+        $get_shipment_history = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}wtp_shipment_history WHERE post_id = '$wtp_id' ORDER BY date_time DESC");
 
         $wtp_fields_json = file_get_contents(WP_TRACKPRO_PLUGIN_PATH . 'admin/assets/json/wtp-shipment-history.json');
         $decode_wtp_fields = json_decode($wtp_fields_json);
-        $get_display_field_label = [];
-        $get_field_name = [];
+        $get_display_field_name = [];
         if ($decode_wtp_fields) {
             foreach ($decode_wtp_fields as $wtp_field) {
-                if ($wtp_field->hide == 0) {
-                    $get_display_field_label[$wtp_field->name] = $wtp_field->label;
-                    $get_field_name[] = $wtp_field->name;
+                if ($wtp_field->display_metabox == 1) {
+                    $get_display_field_name[] = $wtp_field->name;
                 }
             }
         }
 
-        $get_display_field_value = [];
-        if ($get_product_information) {
-            $product_information = $get_product_information[0];
-            foreach (json_decode($product_information->prod_values, true) as $key => $value) {
-                if (in_array($key, $get_field_name)) {
-                    $get_display_field_value[$key] = $value;
-                }
-            }
-        }
-        $merge_product_information = [];
-        if (!empty($get_display_field_label) && !empty($get_display_field_value)) {
-            $merge_product_information = array_merge_recursive($get_display_field_label, $get_display_field_value);
-        }
-
-        if ($merge_product_information) {
-            foreach ($merge_product_information as $product_info) {
+        if ($get_shipment_history) {
+            foreach ($get_shipment_history as $key => $shipment_history) {
+                $decode_prod_val = json_decode($shipment_history->prod_values);
                 ?>
-        <div class="wtp-shipment-history">
-            <p>
-                <strong class="wtp-shipment-history-label">
-                    <?php echo $product_info[0]; ?>
-                </strong>:
-                <span class="wtp-shipment-history-value">
-                    <?php echo $product_info[1]; ?>
-                </span>
-            </p>
+        <div class="wtp-row" id="wtp-row-<?php echo $shipment_history->sh_id ?>">
+            <?php
+                    foreach ($decode_prod_val as $key => $value) {
+                        if (in_array($key, $get_display_field_name)) {
+                            ?>
+                    <div class="wtp-fields <?php echo $key; ?>">
+                        <p>
+                            <?php echo $value; ?>
+                        </p>
+                    </div>
+                    <?php
+                        }
+                    }
+                    ?>
+
+            <div class="wtp-fields wtp-field-action">
+                <div type="button" class="wtp-button wtp-view swal2-styled" name="wtp-shipment-history-edit" btn-action="view"
+                    sh-id="<?php echo $shipment_history->sh_id; ?>" placeholder="View">
+                    <span class="dashicons dashicons-visibility"></span> View
+                </div>
+                <div type="button" class="wtp-button wtp-edit swal2-styled" name="wtp-shipment-history-edit"
+                    sh-id="<?php echo $shipment_history->sh_id; ?>" btn-action="edit"><span
+                        class="dashicons dashicons-edit-page"></span> Edit
+                </div>
+                <div type="button" class="wtp-button wtp-delete swal2-styled" name="wtp-shipment-history-delete"
+                    btn-action="delete" sh-id="<?php echo $shipment_history->sh_id; ?>">
+                    <span class="dashicons dashicons-trash"></span> Delete
+                </div>
+            </div>
         </div>
         <?php
             }
-        } else {
-            ?>
-            <div class="wtp-shipment-history">
-                <h2 class="wtp-error-message">
-                    <strong class="wtp-shipment-history-label">
-            <?php _e("No Results", "wp-trackpro"); ?>
-            </strong>
 
-        </h2>
-    </div>
-<?php
         }
+
         wp_die();
     }
 

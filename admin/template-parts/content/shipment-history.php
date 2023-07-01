@@ -47,7 +47,7 @@ ob_start();
         <?php
     }
     ?>
-    <div class="wtp-sh-wrap-row">
+    <div class="wtp-sh-wrap-rows">
         <?php
         if ($get_shipment_history) {
             $wtp_sorted_shipment_history = [];
