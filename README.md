@@ -4,7 +4,7 @@ Track, manage, and streamline your shipments with WP TrackPro, the all-in-one tr
 <b>Free Features:</b>
 - Shipment History
 - Track Shipment
-- Email
+- Email Notification every shipment update
 
 <b>Pro Features(to be added):<b>
 - SMS Notification
