@@ -1,6 +1,6 @@
 === WPTrackPro ===
 Contributors: PJVillanueva
-Donate link: https://wpcargo.com/
+Donate link: https://github.com/pjv17/wptrackpro
 Tags: shipment tracking, parcel tracking, order tracking, shipment management, tracking plugin, shipment notifications, tracking codes, shipping management, logistics plugin, package tracking, shipment updates, shipment hhistory, delivery tracking, order management
 Tested up to: 6.2.2
 Requires PHP: 7.2
