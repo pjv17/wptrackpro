@@ -13,7 +13,7 @@ if (!isset($_REQUEST['wtp-tracking-code'])) {
     <div class="wtp-form">
         <form method="GET">
             <label for="wtp-tracking-input-field">
-                <?php echo _e(apply_filters('wpt-tracking-form-label', 'Track'), 'wp-trackpro'); ?>
+                <?php echo _e(apply_filters('wpt-tracking-form-label', 'Track'), 'wptrackpro'); ?>
             </label>
             <input id="wtp-tracking-input-field" name="wtp-tracking-code" type="text" placeholder="Input Tracking Code">
             <input type="submit" value="Track">

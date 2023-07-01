@@ -36,7 +36,7 @@ if (isset($_REQUEST['wtp-tracking-code'])) {
 
                     <div class="wtp-shipment-detail wtp-tracking-code">
                         <p><strong>
-                                <?php _e('Tracking Code: ', 'wp-trackpro'); ?>
+                                <?php _e('Tracking Code: ', 'wptrackpro'); ?>
                             </strong>
                             <?php echo get_the_title(); ?>
                         </p>
@@ -44,7 +44,7 @@ if (isset($_REQUEST['wtp-tracking-code'])) {
 
                     <div class="wtp-shipment-detail wtp-latest-status">
                         <p><strong>
-                                <?php _e('Status: ', 'wp-trackpro'); ?>
+                                <?php _e('Status: ', 'wptrackpro'); ?>
                             </strong>
                             <?php echo $get_latest_status; ?>
                         </p>
@@ -52,7 +52,7 @@ if (isset($_REQUEST['wtp-tracking-code'])) {
 
                     <div class="wtp-shipment-detail wtp-sender">
                         <p><strong>
-                                <?php _e('Sender: ', 'wp-trackpro'); ?>
+                                <?php _e('Sender: ', 'wptrackpro'); ?>
                             </strong>
                             <?php echo get_post_meta(get_the_ID(), 'wtp-sender-name', true); ?>
                         </p>
@@ -74,7 +74,7 @@ if (isset($_REQUEST['wtp-tracking-code'])) {
                                         ?>
                                         <div class="wtp-fields <?php echo $wtp_field->name; ?>">
                                             <label>
-                                                <?php _e($wtp_field->label, 'wp-trackpro'); ?>
+                                                <?php _e($wtp_field->label, 'wptrackpro'); ?>
                                             </label>
                                         </div>
                                         <?php
@@ -114,7 +114,7 @@ if (isset($_REQUEST['wtp-tracking-code'])) {
         } else {
             ?>
         <h3>
-            <?php _e('No Results', 'wp-trackpro') ?>
+            <?php _e('No Results', 'wptrackpro') ?>
         </h3>
         <?php
         }

@@ -16,14 +16,14 @@ $wtp_settings = get_option('wp_trackpro_options');
     <div class="wtp-row">
         <div class="wtp-fields wtp-field-total-weight">
             <label>
-                <?php _e('Total Weight(KG)', 'wp-trackpro'); ?>
+                <?php _e('Total Weight(KG)', 'wptrackpro'); ?>
             </label>
             <input type="number" name="wtp-total-weight"
                 value="<?php echo get_post_meta($post->ID, 'wtp-total-weight', true); ?>">
         </div>
         <div class="wtp-fields wtp-field-shipping-mode">
             <label>
-                <?php _e('Shipping Mode', 'wp-trackpro'); ?>
+                <?php _e('Shipping Mode', 'wptrackpro'); ?>
             </label>
             <select name="wtp-shipping-mode">
                 <?php
@@ -43,7 +43,7 @@ $wtp_settings = get_option('wp_trackpro_options');
         </div>
         <div class="wtp-fields wtp-field-reference-number">
             <label>
-                <?php _e('Reference Number', 'wp-trackpro'); ?>
+                <?php _e('Reference Number', 'wptrackpro'); ?>
             </label>
             <input type="text" name="wtp-reference-number"
                 value="<?php echo get_post_meta($post->ID, 'wtp-reference-number', true); ?>">
@@ -53,7 +53,7 @@ $wtp_settings = get_option('wp_trackpro_options');
     <div class="wtp-row">
         <div class="wtp-fields wtp-field-instructions">
             <label>
-                <?php _e('Instructions', 'wp-trackpro'); ?>
+                <?php _e('Instructions', 'wptrackpro'); ?>
             </label>
             <textarea name="wtp-field-instructions"
                 rows="10"><?php echo get_post_meta($post->ID, 'wtp-field-instructions', true); ?></textarea>
@@ -64,7 +64,7 @@ $wtp_settings = get_option('wp_trackpro_options');
 
         <div class="wtp-fields wtp-field-pickup-time">
             <label>
-                <?php _e('Pickup Time', 'wp-trackpro'); ?>
+                <?php _e('Pickup Time', 'wptrackpro'); ?>
             </label>
             <input type="time" name="wtp-pickup-time"
                 value="<?php echo get_post_meta($post->ID, 'wtp-pickup-time', true); ?>">
@@ -72,7 +72,7 @@ $wtp_settings = get_option('wp_trackpro_options');
 
         <div class="wtp-fields wtp-field-pickup-date">
             <label>
-                <?php _e('Pickup Date', 'wp-trackpro'); ?>
+                <?php _e('Pickup Date', 'wptrackpro'); ?>
             </label>
             <input type="date" name="wtp-pickup-date"
                 value="<?php echo get_post_meta($post->ID, 'wtp-pickup-date', true); ?>">

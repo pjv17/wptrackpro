@@ -29,8 +29,8 @@ class WTP_Settings
     {
         add_submenu_page(
             'edit.php?post_type=wp_trackpro',
-            __('Settings', 'wp-trackpro'),
-            __('Settings', 'wp-trackpro'),
+            __('Settings', 'wptrackpro'),
+            __('Settings', 'wptrackpro'),
             'manage_options',
             'wp_trackpro_settings',
             array($this, 'wp_trackpro_options_display')
@@ -46,7 +46,7 @@ class WTP_Settings
 
         echo '<div class="wrap">';
 
-        printf('<h1>%s</h1>', __('WP TrackPro Settings', 'wp-trackpro'));
+        printf('<h1>%s</h1>', __('WP TrackPro Settings', 'wptrackpro'));
 
         echo '<form method="post" action="options.php">';
 
@@ -72,14 +72,14 @@ class WTP_Settings
 
         add_settings_section(
             'header_settings_section',
-            __('General Settings', 'wp-trackpro'),
+            __('General Settings', 'wptrackpro'),
             '',
             'wp-trackpro-settings-page'
         );
 
         add_settings_field(
             'wtp_settings_countries',
-            __('Shipment Countries', 'wp-trackpro'),
+            __('Shipment Countries', 'wptrackpro'),
             array($this, 'countries_callback'),
             'wp-trackpro-settings-page',
             'header_settings_section'
@@ -87,7 +87,7 @@ class WTP_Settings
 
         add_settings_field(
             'wtp_settings_shipping_mode',
-            __('Shipping Mode', 'wp-trackpro'),
+            __('Shipping Mode', 'wptrackpro'),
             array($this, 'shipping_mode'),
             'wp-trackpro-settings-page',
             'header_settings_section'
