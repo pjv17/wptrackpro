@@ -414,13 +414,13 @@ class WP_TrackPro_Admin
             <p>
                 <strong class="wtp-shipment-history-label">
                     <?php echo $product_info[0]; ?>
-</strong>:
-<span class="wtp-shipment-history-value">
-    <?php echo $product_info[1]; ?>
-</span>
-</p>
-</div>
-<?php
+                </strong>:
+                <span class="wtp-shipment-history-value">
+                    <?php echo $product_info[1]; ?>
+                </span>
+            </p>
+        </div>
+        <?php
             }
         } else {
             ?>

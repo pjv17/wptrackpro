@@ -1,15 +1,18 @@
 jQuery(function ($) {
   const wtpAdminScripts = {
     init: function () {
-      this.addProducts();
-      this.displayProductDetails();
-      this.editProductDetails();
-      this.deleteProductDetails();
-      this.addShipmentHistory();
-      this.displayShipmentHistory();
-      this.editShipmentHistory();
-      this.deleteShipmentHistory();
-      this.sortShipmentHistory();
+      let url = window.location.href;
+      if (url.includes('action=edit') || url.includes('post-new.php')) {
+        this.addProducts();
+        this.displayProductDetails();
+        this.editProductDetails();
+        this.deleteProductDetails();
+        this.addShipmentHistory();
+        this.displayShipmentHistory();
+        this.editShipmentHistory();
+        this.deleteShipmentHistory();
+        this.sortShipmentHistory();
+      }
     },
     addProducts() {
       $(".button-add-wrap .wtp-button.wtp-add-product").on("click", function () {
