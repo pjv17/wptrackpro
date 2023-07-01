@@ -1,0 +1,82 @@
+.wtp-form label {
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.wtp-form input {
+    background: #fff;
+    border: 1px solid #ccc;
+    padding: 1rem;
+}
+
+.wtp-form input[type="submit"] {
+    background: #4c567a;
+    color: #ffff;
+    cursor: pointer;
+}
+
+
+.wtp-row {
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    padding: 1rem;
+}
+
+.wtp-row .wtp-fields {
+    flex: 1;
+    align-items: center;
+    margin-left: .5rem;
+}
+
+.wtp-row .wtp-fields:nth-child(1) {
+    margin-left: 0;
+}
+
+.wtp-fields label {
+    font-size: .9rem;
+    margin-bottom: 0.2rem;
+    display: block;
+}
+
+.wtp-row .wtp-fields input,
+.wtp-row .wtp-fields select {
+    width: 100%;
+    padding: 0.3rem;
+    font-size: 1rem;
+    line-height: 2;
+    border-radius: 4px;
+    border: 1px solid #999999;
+    height: 3rem;
+}
+
+#wtp-product-information .wtp-row.button-add-wrap,
+#wtp-shipment-history-information .wtp-row.button-add-wrap {
+    background: #fff;
+}
+
+#wtp-product-information .wtp-row.wtp-header-row,
+#wtp-shipment-history-information .wtp-row.wtp-header-row {
+    background: #496e7c;
+    color: #ffffff;
+}
+
+#wtp-product-information .wtp-row.button-add-wrap,
+#wtp-shipment-history-information .wtp-row.button-add-wrap {
+    background: #fff;
+}
+
+.wtp-row.button-add-wrap {
+    padding: 1rem 0;
+}
+
+.wtp-button.wtp-add-product {
+    margin-left: 0;
+}
+
+#wtp-product-information .wtp-row .wtp-fields p,
+#wtp-shipment-history-information .wtp-row .wtp-fields p {
+    font-size: 14px;
+}

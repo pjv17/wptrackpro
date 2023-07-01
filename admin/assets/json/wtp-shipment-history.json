@@ -7,7 +7,8 @@
         "value": "",
         "required": 0,
         "hide": 1,
-        "display_metabox": 0
+        "display_metabox": 0,
+        "display_frontend": 0
     },
     {
         "label": "Description",
@@ -17,7 +18,8 @@
         "value": "",
         "required": 0,
         "hide": 0,
-        "display_metabox": 1
+        "display_metabox": 1,
+        "display_frontend": 1
     },
     {
         "label": "Date",
@@ -27,7 +29,8 @@
         "value": "",
         "required": 1,
         "hide": 0,
-        "display_metabox": 1
+        "display_metabox": 1,
+        "display_frontend": 1
     },
     {
         "label": "Time",
@@ -37,7 +40,8 @@
         "value": "",
         "required": 1,
         "hide": 0,
-        "display_metabox": 1
+        "display_metabox": 1,
+        "display_frontend": 0
     },
     {
         "label": "Status",
@@ -48,7 +52,8 @@
         "value": "",
         "required": 1,
         "hide": 0,
-        "display_metabox": 1
+        "display_metabox": 1,
+        "display_frontend": 1
     },
     {
         "label": "Location",
@@ -58,6 +63,7 @@
         "value": "",
         "required": 0,
         "hide": 0,
-        "display_metabox": 1
+        "display_metabox": 1,
+        "display_frontend": 1
     }
 ]

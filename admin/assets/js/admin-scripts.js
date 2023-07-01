@@ -939,7 +939,7 @@ jQuery(function ($) {
           wtpAdminScripts.editProductDetails();
           wtpAdminScripts.displayShipmentHistory();
           wtpAdminScripts.editShipmentHistory();
-          wtpAdminScripts.deleteProductDetails();
+          wtpAdminScripts.deleteShipmentHistory();
         }
       });
     },
