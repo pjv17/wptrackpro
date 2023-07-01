@@ -4,7 +4,7 @@ Donate link: https://wpcargo.com/
 Tags: shipment tracking, parcel tracking, order tracking, shipment management, tracking plugin, shipment notifications, tracking codes, shipping management, logistics plugin, package tracking, shipment updates, shipment hhistory, delivery tracking, order management
 Tested up to: 6.2.2
 Requires PHP: 7.2
-Stable tag: 1.0.0
+Stable tag: 1.5.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -41,6 +41,10 @@ Track, manage, and streamline your shipments with WPTrackPro, the ultimate all-i
 
 6. After updating the templates, the changes will take effect on your WP TrackPro plugin. You can now refresh the tracking page to see the customized tracking form and shipment results reflecting your design modifications.
 
+=Notes:=
+- If changing the fields on both Product Information and Shipment History the name should start on <code>wtp-</code>. Example <code>wtp-test or wtp-shipment-name</code>
+- If changing the shipment history fields the <code>wtp-shipment-status and wtp-field-shipment-history-id</code> postmeta key should be on the edited fields.
+- If changing the product information fields the <code>wtp-field-product-info-id</code> postmeta key should be on the edited fields.
 
 Please contact me if you need a custom features or feedbacks at <a href="mailto:wptrackpro@gmail.com">wptrackpro@gmail.com</a>. Thank you!
 

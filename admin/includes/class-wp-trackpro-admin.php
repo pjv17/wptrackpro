@@ -51,6 +51,7 @@ class WP_TrackPro_Admin
         include_once WP_TRACKPRO_PLUGIN_PATH . 'admin/includes/class-wtp-metabox.php';
         include_once WP_TRACKPRO_PLUGIN_PATH . 'admin/includes/class-wtp-settings.php';
         include_once WP_TRACKPRO_PLUGIN_PATH . 'admin/includes/class-wtp-database.php';
+        include_once WP_TRACKPRO_PLUGIN_PATH . 'admin/includes/class-wtp-admin-tables.php';
     }
 
     public function wtp_enqueue_admin_script()

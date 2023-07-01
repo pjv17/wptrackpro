@@ -31,7 +31,7 @@ ob_start();
                     ?>
                     <div class="wtp-fields <?php echo $wtp_field->name; ?>">
                         <label>
-                            <?php _e($wtp_field->label, 'wp-trackpro'); ?>
+                            <?php _e($wtp_field->label, 'wptrackpro'); ?>
                         </label>
                     </div>
                     <?php
@@ -40,7 +40,7 @@ ob_start();
             ?>
             <div class="wtp-fields wtp-field-weight">
                 <label>
-                    <?php _e('Action', 'wp-trackpro'); ?>
+                    <?php _e('Action', 'wptrackpro'); ?>
                 </label>
             </div>
         </div>

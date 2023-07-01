@@ -951,8 +951,10 @@ jQuery(function ($) {
       $(".wtp-field input[type='date']").val(today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2));
     },
     setDefaultTime() {
-      var time = new Date();
-      $(".wtp-field input[type='time']").val(time.getHours() + ':' + time.getMinutes());
+      let time = new Date();
+      let currentHours = time.getHours();
+      currentHours = ("0" + currentHours).slice(-2);
+      $(".wtp-field input[type='time']").val(currentHours + ':' + time.getMinutes());
     }
   };
   $(document).ready(function () {

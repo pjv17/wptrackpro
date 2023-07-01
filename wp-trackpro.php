@@ -6,7 +6,7 @@
  * Author: <a href="https://pjv17.github.io/pjvillanueva.github.io/">WPTrackPro</a>
  * Text Domain: wptrackpro
  * Domain Path: /languages
- * Version: 1.0.0
+ * Version: 1.5.0
  */
 
 /* 
