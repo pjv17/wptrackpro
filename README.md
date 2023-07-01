@@ -16,3 +16,5 @@ Track, manage, and streamline your shipments with WP TrackPro, the all-in-one tr
 - You can add/edit the shipment history fields by using <code>add_filter('wtp-shipment-history-fields-json', 'your_function_here');</code>. And you can find the JSON file for your reference under /wp-trackpro/admin/assets/js/json/wtp-shipment-history.json
 
 
+Please contact me if you have a custom features that you need at wptrackpro@gmail.com.
+
