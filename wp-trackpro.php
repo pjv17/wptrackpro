@@ -1,17 +1,16 @@
 <?php
 /*
  * Plugin Name: WP TrackPro
- * Plugin URI: https://pjv17.github.io/pjvillanueva.github.io/
+ * Plugin URI: https://github.com/pjv17/wptrackpro
  * Description: Track, manage, and streamline your shipments with WP TrackPro, the all-in-one tracking shipment plugin for WordPress. Keep a detailed shipment history, provide tracking codes for clients, send notifications via email and SMS(Pro Version), and customize fields(Pro Version) to fit your business needs. 
- * Author: <a href="https://pjv17.github.io/pjvillanueva.github.io/">PJ Villanueva</a>
+ * Author: <a href="https://pjv17.github.io/pjvillanueva.github.io/">WPTrackPro</a>
  * Text Domain: wp-trackpro
  * Domain Path: /languages
  * Version: 1.0.0
  */
 
 /* 
-
-MIT License
+License
 
 Copyright (c) 2023 WPTRACKPRO
 
@@ -32,6 +31,8 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+This plugin is also under GNU GENERAL PUBLIC LICENSE. Read more about here https://github.com/pjv17/wptrackpro/blob/master/LICENSE
 
 */
 
