@@ -45,6 +45,7 @@ Track, manage, and streamline your shipments with WPTrackPro, the ultimate all-i
 - If changing the fields on both Product Information and Shipment History the name should start on <code>wtp-</code>. Example <code>wtp-test or wtp-shipment-name</code>
 - If changing the shipment history fields the <code>wtp-shipment-status and wtp-field-shipment-history-id</code> postmeta key should be on the edited fields.
 - If changing the product information fields the <code>wtp-field-product-info-id</code> postmeta key should be on the edited fields.
+- Please refer to this files <code>/wp-trackpro/admin/assets/js/json/wtp-shipment-history.json OR /wp-trackpro/admin/assets/js/json/wtp-fields.json</code>
 
 Please contact me if you need a custom features or feedbacks at <a href="mailto:wptrackpro@gmail.com">wptrackpro@gmail.com</a>. Thank you!
 
